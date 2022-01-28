@@ -1,0 +1,14 @@
+FROM tiangolo/uvicorn-gunicorn:python3.8-slim
+
+# Copy and install requirements.txt
+COPY ./requirements-cpu.txt ./requirements-cpu.txt
+COPY ./src /app
+COPY ./scripts/start.sh /start.sh
+COPY ./scripts/gunicorn_conf.py /gunicorn_conf.py
+RUN mkdir -p /app/resources/model \
+    && pip install --no-cache-dir -r requirements-cpu.txt \
+    && chmod +x /start.sh && mkdir -p /app/results
+ARG MODEL_PATH
+COPY ${MODEL_PATH}/* /app/resources/model/
+
+ENV APP_MODULE=main:app
