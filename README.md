@@ -1,6 +1,10 @@
-# BabelNet-Linker
+# BabelNet-linker
 
-The BabelNet-Linker API allows a dictionary to be linked to BabelNet at the definition level. Specifically, this API allows a definition in any language to be mapped to a semantically-equivalent English definition in BabelNet. The present API is made up of the following three components: 
+The BabelNet-linker API allows a dictionary to be linked to BabelNet at the definition level. Specifically, this API allows a definition in any language to be mapped to a semantically-equivalent English definition in BabelNet. 
+
+The BabelNet-linker API allows a dictionary to be linked to BabelNet at the definition level. Specifically, this API allows a definition in any language to be mapped to a semantically-equivalent English definition in BabelNet by relying on state-of-the-art Transformer-based architectures. Importantly, this API will make it possible to map the dictionaries made available within the ELEXIS Consortium at definition level by pivoting through BabelNet. 
+
+The present API is made up of the following three components: 
 
 1) Model: This module contains the model used to perform cross-lingual dictionary linking.
 2) BabelNet: This module contains the code to obtain the BabelNet senses of a given lemma and POS tag. This module requires the BabelNet index.
