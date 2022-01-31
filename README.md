@@ -82,6 +82,6 @@ On the other hand, when evaluating the model, we are given a single definition i
 
 ### Datasets
 
-For training and validation purposes, we used two different datasets. The first one is based on BabelNet and uses already linked resources (i.e. WordNet and Wikipedia) in different languages to create positive and negative examples. The second dataset comes from the Monolingual Word Sense alignment (MWSA) and serves as additional data to train the model and aims at domain adaptation since the BabelNet dataset uses definitions from a few determined sources.
+For training and validation purposes, we used two different datasets. The first one is based on BabelNet and uses already linked resources (i.e. WordNet and Wikipedia) in different languages to create positive and negative examples. This dataset was created in the following languages: Basque, Bulgarian, Danish, Dutch, English, Estonian, French, German, Hausa, Hungarian, Irish, Italian, Portuguese, Russian, Slovak, Slovene and Spanish. The second dataset comes from the Monolingual Word Sense alignment (MWSA) and serves as additional data to train the model and aims at domain adaptation since the BabelNet dataset uses definitions from a few determined sources. 
 
 For testing purposes, we used a manually-curated dataset in the following languages: Bulgarian, Danish, Estonian, Hungarian, Irish, Italian, Portuguese, Slovenian and Spanish.
