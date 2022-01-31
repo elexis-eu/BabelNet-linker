@@ -53,17 +53,9 @@ To run the inference script we will need to run a cron job that will trigger the
 
         docker exec dict_api bash -c 'python3 run_async.py'
 
-# Architecture description
-
-This API is divided into three modules.
-
-- Model: This module contains the model that will be used to perform the inference.
-- BabelNet: This module contains the code that will be used to obtain the BabelNet senses of a given lemma and pos tag.
-- API: This module contains the code that will be used to obtain the dictionary senses from LEXENOMY of a given lemma and pos tag and communicate with the other two modules to perform the linking task.
-
 ## Model
 
-There are different implementations for the model, all based on a Transformer Neural Network, trained on our own curated datasets using BabelNet senses. We have two implementations:
+As far as the models which we used to perform cross-lingual lexical resource linking, we devised two Transformer-based architectures, trained on our own curated datasets using BabelNet definitions. Such architectures are:
 
 ![](https://raw.githubusercontent.com/UKPLab/sentence-transformers/master/docs/img/Bi_vs_Cross-Encoder.png)
 
@@ -74,18 +66,18 @@ The embedding-based approach has the advantage of being able to compute the simi
 
 The cross-encoder on the other hand is slower to compute since it has to encode both definitions simultaneously, ie. if there are N source senses and M target senses for a given lemma and pos tag, it will have to encode N*M inputs. However, it is able to compute the similarity score between the two definitions as input, leading to a better performance, which is the main advantage of this approach.
 
-Instead of BERT we use multilingual Encoders that have been pretrained on NLI tasks:
+Instead of BERT we used multilingual encoders that have been pretrained on NLI tasks:
 
 - [mDeBERTa](https://huggingface.co/MoritzLaurer/mDeBERTa-v3-base-mnli-xnli)
 - [paraphrase-multilingual-mpnet-base-v2](https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2)
 - [LaBSE](https://huggingface.co/sentence-transformers/LaBSE)
 
-At the moment the model is trained on a binary task, ie. to determine whether a given pair of definitions belong to the same synset. This is different than the evaluation at inference time. Here, the model is only given a pair and the loss is computed based on the similarity score between the two definitions in a binary fashion. 
+The model is trained on a binary task which consists in determining whether a given pair of definitions belong to the same synset. This is different than the evaluation at inference time. Here, the model is only given a pair and the loss is computed based on the similarity score between the two definitions in a binary fashion. 
 
 On the other hand, when evaluating the model, we are given a single definition in a source language, and we have to link it to the corresponding definition (synset) from BabelNet. Furthermore, we may have negative instances where we do not have a definition in the target language, for which the model should give a low score to all the candidate definitions. Performance is therefore based on this setup, for which we have positive and negative examples. We report Accuracy, Precision, Recall, and F1-Score, as well as Accuracy on the positive examples (ie. the ones that have a definition in the target language).
 
 ### Datasets
 
-For training, we use two different datasets. The first one is based on BabelNet and uses already linked resources (i.e. WordNet and Wikipedia) in different languages to create positive and negative examples. 
+For training and validation purposes, we used two different datasets. The first one is based on BabelNet and uses already linked resources (i.e. WordNet and Wikipedia) in different languages to create positive and negative examples. The second dataset comes from the Monolingual Word Sense alignment (MWSA) and serves as additional data to train the model and aims at domain adaptation since the BabelNet dataset uses definitions from a few determined sources.
 
-The other dataset comes from the Monolingual Word Sense alignment (MWSA) and serves as additional data to train the model and aims at domain adaptation since the BabelNet dataset uses definitions from a few determined sources.
+For testing purposes, we used a manually-curated dataset in the following languages: Bulgarian, Danish, Estonian, Hungarian, Irish, Italian, Portuguese, Slovenian and Spanish.
