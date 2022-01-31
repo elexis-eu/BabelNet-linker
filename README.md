@@ -2,8 +2,8 @@
 
 The BabelNet-Linker API allows a dictionary to be linked to BabelNet at the definition level. Specifically, this API allows a definition in any language to be mapped to a semantically-equivalent English definition in BabelNet. The present API is made up of the following three components: 
 
-1) Model: This module contains the model that will be used to perform cross-lingual dictionary linking.
-2) BabelNet: The REST API requires a proprietary BabelNet index to work.
+1) Model: This module contains the model used to perform cross-lingual dictionary linking.
+2) BabelNet: This module contains the code to obtain the BabelNet senses of a given lemma and POS tag. This module requires the BabelNet index.
 3) REST API: This module contains the code that will be used to obtain the dictionary senses from LEXONOMY of a given lemma and pos tag and communicate with the other two modules to perform the linking task.
 
 ## 1) Model
@@ -11,6 +11,8 @@ The BabelNet-Linker API allows a dictionary to be linked to BabelNet at the defi
 The model is loaded when inference is performed on the pending requests. This is dealt with by the backend with a cronjob. More details are in the API section. For the docker container to access the model files, please place them in the model/ directory at the root of the project.
 
 To download the model trained for the task, please visit the [SapienzaNLP website](http://nlp.uniroma1.it/resources/).
+
+We provide details about the models used in what follows.
 
 ## 2) BabelNet
 
@@ -53,7 +55,7 @@ To run the inference script we will need to run a cron job that will trigger the
 
         docker exec dict_api bash -c 'python3 run_async.py'
 
-## Model
+## Architectures
 
 As far as the models which we used to perform cross-lingual lexical resource linking, we devised two Transformer-based architectures, trained on our own curated datasets using BabelNet definitions. Such architectures are:
 
