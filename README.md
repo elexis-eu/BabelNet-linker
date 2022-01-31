@@ -10,7 +10,7 @@ The BabelNet-Linker API allows a dictionary to be linked to BabelNet at the defi
 
 The model is loaded when inference is performed on the pending requests. This is dealt with by the backend with a cronjob. More details are in the API section. For the docker container to access the model files, please place them in the model/ directory at the root of the project.
 
-To download the model trained for the task, please go [here](http://nlp.uniroma1.it/resources/).
+To download the model trained for the task, please visit the [SapienzaNLP website](http://nlp.uniroma1.it/resources/).
 
 ## 2) BabelNet
 
