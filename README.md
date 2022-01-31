@@ -14,7 +14,7 @@ To download the model trained for the task, please go [here](http://nlp.uniroma1
 
 ## 2) BabelNet
 
-The REST API requires access to definitions from BabelNet. It makes a request to an endpoint that returns all definitions, in English, for a given lemma, pos tag and language. The REST API expects the endpoint at http://192.168.1.91:9878, but it can be modified at: https://github.com/SapienzaNLP/CLDL_ELEXIS/blob/ece0435af652d2b9e0da2cc6e75d775a20488900/src/babelnet_calls.py#L8-L14
+The REST API requires access to definitions from BabelNet. It makes a request to an endpoint that returns all definitions, in English, for a given lemma, pos tag and language. The REST API expects the endpoint at http://192.168.1.91:9878, but it can be modified at: https://github.com/elexis-eu/CLDL/blob/ece0435af652d2b9e0da2cc6e75d775a20488900/src/babelnet_calls.py#L8-L14
 
 There are different ways to set up an endpoint that returns the required with BabelNet. For more information see the [BabelNet Website](https://babelnet.org/guide#HowcanIdownloadtheBabelNetindices?).
 
